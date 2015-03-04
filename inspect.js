@@ -1,5 +1,5 @@
 /**
- * Module dependencies
+ * Modules dependencies
  */
 
 var url = require('url');
