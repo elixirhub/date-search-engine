@@ -35,7 +35,9 @@ for (var i = 2, c = 2; i < process.argv.length; i++) {
 
       res.on('end', function () {
 
-        var results = lib.inspect(htmlReceived);
+        var results = lib.inspect(htmlReceived, {
+          "logs": ['main']
+        });
         
         console.log(res.statusCode + ' - ' + urlToInspect + ' ...');
         console.log(util.inspect(results, {colors: true, depth: null}));
