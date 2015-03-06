@@ -8,18 +8,24 @@ international format.
 
 ## Support
 
-##### Numeric dates
+* Numeric dates
+* Dates with letters
+* From-to dates
+* Existing dates
+* Between dates
 
-###### Separators of the components:
+#### Numeric dates
+
+###### Separators
 
 * "/" slash
 * "." dot
 * " " space
 * "-" dash
 * "–" en-dash (U+2013; vim digraph Ctrl+K - N)
-* "—" em-dash (U+2015; vim digraph Ctrl+K - M)
+* "—" em-dash (U+2014; vim digraph Ctrl+K - M)
 
-Separators may be preceded of followed by one space.
+Separators may be preceded and/or followed by one space.
 
 ###### Support
 
@@ -36,21 +42,21 @@ Year, month and day:
 ###### Examples
 
 Order:
-* 20/04/2015 (Little-endian)
-* 04 / 20 / 2015 (Middle-endian)
-* 2015-04-20 (Big-endian)
+* 15/01/2013 (Little-endian)
+* 01 / 16 / 2013 (Middle-endian)
+* 2013-01-17 (Big-endian)
 
 Year, month and day:
-* 14-14-23 (Two-digit year)
-* 15/3/2015 (One-digit month)
-* 3/9/2015 (One-digit day)
+* 18-01-13 (Two-digit year)
+* 19/1/2013 (One-digit month)
+* 3.01.2013 (One-digit day)
 
 Default:
-* 04/05/2015 (Gives 2015-05-04)
-* 04/05/06 (Gives 2006-05-04)
+* 04/05/2013 (Gives 04 to day)
+* 04/05/06 (Gives 05 to the month and 2006 to the year)
 
 
-##### Dates with letters
+#### Dates with letters
 
 ###### Support
 
@@ -75,34 +81,93 @@ Other:
 ###### Examples
 
 Order:
-* 17 January 2015 (Little-endian)
-* January 17 2015 (Middle-endian)
-* 2015 January 17 (Big-endian)
+* 15 January 2014 (Little-endian)
+* January 16 2014 (Middle-endian)
+* 2014 January 17 (Big-endian)
 
 Day:
-* the Fourteenth of July, 2014 (Day in full letters)
+* the Fourteenth of January, 2014 (Day in full letters)
 * July the fourteenth, 2014 (Day in full letters)
-* July 14th, 2014 (Day in both numbers and letters)
-* 2010 January 05 (Day in number)
-* 5 January 2010 (One-digit day)
+* January 15th, 2014 (Day in both numbers and letters)
+* 2014 January 16 (Day in number)
+* 5 January 2014 (One-digit day)
 
 Month:
-* 5th January 2014 (Month in long form letters)
-* 5 Jan 2015 (Month in short form letters)
+* 6th January 2014 (Month in long form letters)
+* 7 Jan 2014 (Month in short form letters)
 
 Other:
-* 2014 jan 5 (Case-insensitive search)
+* 2014 jan 8 (Case-insensitive search)
 
 
-##### From-to dates
+#### From-to dates
+
+###### Separators
+
+* "-" dash
+* "–" en-dash (U+2013; vim digraph Ctrl+K - N)
+* "—" em-dash (U+2014; vim digraph Ctrl+K - M)
+
+The above separators may be preceded and/or followed by one space.
+
+* " to "
 
 ###### Support
 
 * Day name (e.g. Saterday)
-* 
+* Two-in-one dates
 
 ###### Examples
 
+* 13 July 2015 – 14 July 2015 (en-dash separator)
+* 15/1/2015 to 16/1/2015 (" to " separator)
+* 2015 July 17, Friday - 2015 July 18, Saterday (Day name)
+* 17-18 November 2015 (Two-in-one dates)
+
+#### Existing dates
+
+* 14 May 2016
+* 14 May 2016 (alreadyExists set to true)
+
+#### Between dates
+
+* 15 May 2016 - 20 May 2016
+* 15 May 2016 (between + alreadyExists)
+* 16 May 2016 (between)
+* 17 May 2016 (between)
+
+## Result
+
+```Javascript
+result {
+  datesFound: [],
+  numericDatesCount: Number,
+  dayMonthYearDatesCount: Number,
+  monthDayYearDatesCount: Number,
+  yearMonthDayDatesCount: Number,
+  dayToDayMonthYearDatesCount: Number,
+  fromToDatesCount: Number,
+  betweenFromToDatesCount: Number,
+  alreadyExistingDatesCount: Number,
+  uniqueDatesCount: Number
+}
+```
+
+```Javascript
+result.datesFound[i] {
+  type: "numeric" or "letters",
+  format: "day month year", "month day year" or "year month day",
+  text: { value: String, index: Index in the text },
+  standardDate: 'YYYY-MM-DD',
+  timeInMs: xxxxxxxxxxxx
+  [from: true],
+  [to: true],
+  [iFrom: Index in datesFound],
+  [iTo: Index in datesFound],
+  [alreadyExists: true],
+  [between: { iFrom: Index in datesFound, iTo: Index in datesFound}]
+}
+```
 
 ## Installation
 
@@ -116,12 +181,30 @@ git clone git://github.com/elixirhub/datich.git
 ## Command line utilization
 
 ```Shell
+node datich.js --logs=main,result http://elixir-europe.org/events
 ```
+
+See the library for the available options.
+
 
 ## Library utilization
 
 ```Javascript
+var datich = require('datich');
+
+...
+
+var result = datich(html);
 ```
+
+### datich(html[, options])
+
+* `html` String
+* `options` Object
+  * `options.logs.main` Show the main logs.
+  * `options.logs.result` Show the result in a pleasant way.
+  * `options.logs.json` If `options.logs.result` is set, show the result in
+    JSON.
 
 ## License
 

@@ -5,15 +5,25 @@
 var url = require('url');
 var http = require('http');
 var https = require('https');
-var util = require('util');
-
 var lib = {
   "datich": require('./lib/datich.js')
 };
 
 
+var datichOpts = {
+  logs: []
+};
+
+
 for (var i = 2, c = 2; i < process.argv.length; i++) {
   (function (i) {
+
+    if (/^--logs=/.test(process.argv[i])) {
+      if (/main/.test(process.argv[i])) datichOpts.logs.push('main');
+      if (/result/.test(process.argv[i])) datichOpts.logs.push('result');
+      if (/json/.test(process.argv[i])) datichOpts.logs.push('json');
+      return;
+    }
 
     var urlToInspect = process.argv[i];
 
@@ -29,12 +39,10 @@ for (var i = 2, c = 2; i < process.argv.length; i++) {
 
       res.on('end', function () {
 
-        var results = lib.datich(htmlReceived, {
-          "logs": ['main']
-        });
-        
-        console.log(res.statusCode + ' - ' + urlToInspect + ' ...');
-        console.log(util.inspect(results, {colors: true, depth: null}));
+        console.log(res.statusCode + ' - ' + urlToInspect);
+
+        lib.datich(htmlReceived, datichOpts);
+
         if (++c !== process.argv.length) console.log('\n');
 
       });
