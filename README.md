@@ -16,7 +16,7 @@ international format.
 
 #### Numeric dates
 
-###### Separators
+##### Separators
 
 * "/" slash
 * "." dot
@@ -27,7 +27,7 @@ international format.
 
 Separators may be preceded and/or followed by one space.
 
-###### Support
+##### Support
 
 Order:
 * Little-endian (day, month, year)
@@ -39,7 +39,7 @@ Year, month and day:
 * One-digit month
 * One-digit day
 
-###### Examples
+##### Examples
 
 Order:
 * 15/01/2013 (Little-endian)
@@ -58,7 +58,7 @@ Default:
 
 #### Dates with letters
 
-###### Support
+##### Support
 
 Order:
 * Little-endian (day, month, year)
@@ -78,7 +78,7 @@ Month:
 Other:
 * Case-insensitive search
 
-###### Examples
+##### Examples
 
 Order:
 * 15 January 2014 (Little-endian)
@@ -102,7 +102,7 @@ Other:
 
 #### From-to dates
 
-###### Separators
+##### Separators
 
 * "-" dash
 * "–" en-dash (U+2013; vim digraph Ctrl+K - N)
@@ -112,12 +112,12 @@ The above separators may be preceded and/or followed by one space.
 
 * " to "
 
-###### Support
+##### Support
 
 * Day name (e.g. Saterday)
 * Two-in-one dates
 
-###### Examples
+##### Examples
 
 * 13 July 2015 – 14 July 2015 (en-dash separator)
 * 15/1/2015 to 16/1/2015 (" to " separator)
