@@ -1,31 +1,13 @@
-14/03/2011
-14.03.11
-14-03-2011
-14 / 03 / 11
+The following dates are for the Gregorian calendar only.
 
-3/14/2011
-3/14/11
-03- 14-2011
-03/14/11
+The prefered format date is ISO 8601, since the most to least significant
+digit order provides a simple method to order and sort time readings for
+computer applications.
 
-2014-03-13
-14-14-23
-13-2014-8
+/**
+ * Letters dates
+ */
 
-the Fourteenth of July, 2014
-July the fourteenth, 2014
-14th July 2014
-July 14th, 2014
-14 July 2014
-July 14 2014
-
-2010 January 5
-Friday, January 5 2010
-2010 January 5, Friday
-
-Friday, 5 January 2019
-Friday, 5 January 2018
-5 January 2019
 
 17 July 2016 - 18 July 2016
 1 July 2016 to 8 July 2016

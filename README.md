@@ -1,158 +1,128 @@
-#date-search-engine
+# Datich
+
+## Purpose
+
+A node.js module for searching dates and times, and converting them into an
+international format.
+
+
+## Support
+
+##### Numeric dates
+
+###### Separators of the components:
+
+* "/" slash
+* "." dot
+* " " space
+* "-" dash
+* "–" en-dash (U+2013; vim digraph Ctrl+K - N)
+* "—" em-dash (U+2015; vim digraph Ctrl+K - M)
+
+Separators may be preceded of followed by one space.
+
+###### Support
+
+Order:
+* Little-endian (day, month, year)
+* Middle-endian (month, day, year)
+* Big-endian (year, month, day)
+
+Year, month and day:
+* Two-digit year
+* One-digit month
+* One-digit day
+
+###### Examples
+
+Order:
+* 20/04/2015 (Little-endian)
+* 04 / 20 / 2015 (Middle-endian)
+* 2015-04-20 (Big-endian)
+
+Year, month and day:
+* 14-14-23 (Two-digit year)
+* 15/3/2015 (One-digit month)
+* 3/9/2015 (One-digit day)
+
+Default:
+* 04/05/2015 (Gives 2015-05-04)
+* 04/05/06 (Gives 2006-05-04)
+
+
+##### Dates with letters
+
+###### Support
+
+Order:
+* Little-endian (day, month, year)
+* Middle-endian (month, day, year)
+* Big-endian (year, month, day)
+
+Day:
+* Day in full letters (e.g. twenty-second)
+* Day in both numbers and letters (e.g. 2nd)
+* Day in number
+* One-digit day
+
+Month:
+* Month in long form letters (e.g. January)
+* Month in short form letters (e.g. Jan)
+
+Other:
+* Case-insensitive search
+
+###### Examples
+
+Order:
+* 17 January 2015 (Little-endian)
+* January 17 2015 (Middle-endian)
+* 2015 January 17 (Big-endian)
+
+Day:
+* the Fourteenth of July, 2014 (Day in full letters)
+* July the fourteenth, 2014 (Day in full letters)
+* July 14th, 2014 (Day in both numbers and letters)
+* 2010 January 05 (Day in number)
+* 5 January 2010 (One-digit day)
+
+Month:
+* 5th January 2014 (Month in long form letters)
+* 5 Jan 2015 (Month in short form letters)
+
+Other:
+* 2014 jan 5 (Case-insensitive search)
+
+
+##### From-to dates
+
+###### Support
+
+* Day name (e.g. Saterday)
+* 
+
+###### Examples
+
+
+## Installation
+
+Manually:
+
+```Shell
+git clone git://github.com/elixirhub/datich.git
+```
+
 
 ## Command line utilization
 
-### Example
-
 ```Shell
-node inspect.js http://elixir-europe.org/events
 ```
 
-Note that you can add more that one URL.
+## Library utilization
 
-Output:
-
-```Text
-200 - http://elixir-europe.org/events ...
-{ dates: 
-   [ { type: 'with letters',
-       format: 'day month year',
-       text: { value: '8 Mar 2015', index: 5625 },
-       standard: '2015-03-08',
-       numericDate: 1425772800000 },
-     { type: 'with letters',
-       format: 'day month year',
-       text: { value: '16 Mar 2015', index: 5964 },
-       standard: '2015-03-16',
-       numericDate: 1426464000000,
-       from: true,
-       iTo: 2 },
-     { type: 'with letters',
-       format: 'day month year',
-       text: { value: '17 Mar 2015', index: 5979 },
-       standard: '2015-03-17',
-       numericDate: 1426550400000,
-       to: true,
-       iFrom: 1 },
-     { type: 'with letters',
-       format: 'day month year',
-       text: { value: '17 March 2015', index: 6098 },
-       standard: '2015-03-17',
-       numericDate: 1426550400000,
-       between: { iFrom: 1, iTo: 2 },
-       alreadyExists: true },
-     { type: 'with letters',
-       format: 'day month year',
-       text: { value: '18 Mar 2015', index: 6436 },
-       standard: '2015-03-18',
-       numericDate: 1426636800000,
-       from: true,
-       iTo: 5 },
-     { type: 'with letters',
-       format: 'day month year',
-       text: { value: '19 Mar 2015', index: 6451 },
-       standard: '2015-03-19',
-       numericDate: 1426723200000,
-       to: true,
-       iFrom: 4 },
-     { type: 'with letters',
-       format: 'day month year',
-       text: { value: '19 March 2015', index: 6613 },
-       standard: '2015-03-19',
-       numericDate: 1426723200000,
-       between: { iFrom: 7, iTo: 8 },
-       alreadyExists: true },
-     { type: 'with letters',
-       format: 'day month year',
-       text: { value: '18 Mar 2015', index: 6995 },
-       standard: '2015-03-18',
-       numericDate: 1426636800000,
-       from: true,
-       iTo: 8,
-       alreadyExists: true },
-     { type: 'with letters',
-       format: 'day month year',
-       text: { value: '19 Mar 2015', index: 7010 },
-       standard: '2015-03-19',
-       numericDate: 1426723200000,
-       to: true,
-       iFrom: 7,
-       alreadyExists: true },
-     { type: 'without letters',
-       format: 'year month day',
-       text: { value: '2015-03-18', index: 7863 },
-       standard: '2015-03-18',
-       numericDate: 1426636800000,
-       between: { iFrom: 7, iTo: 8 },
-       alreadyExists: true },
-     { type: 'with letters',
-       format: 'day month year',
-       text: { value: '4 May 2015', index: 7951 },
-       standard: '2015-05-04',
-       numericDate: 1430697600000 },
-     { type: 'with letters',
-       format: 'day month year',
-       text: { value: '4th May 2015', index: 8121 },
-       standard: '2015-05-04',
-       numericDate: 1430697600000,
-       alreadyExists: true },
-     { type: 'with letters',
-       format: 'day month year',
-       text: { value: '9 June 2015', index: 8553 },
-       standard: '2015-06-09',
-       numericDate: 1433808000000 },
-     { type: 'with letters',
-       format: 'day month year',
-       text: { value: '9 Jun 2015', index: 8579 },
-       standard: '2015-06-09',
-       numericDate: 1433808000000,
-       alreadyExists: true },
-     { type: 'with letters',
-       format: 'day month year',
-       text: { value: '9 June 2015', index: 8681 },
-       standard: '2015-06-09',
-       numericDate: 1433808000000,
-       alreadyExists: true },
-     { type: 'with letters',
-       format: 'day month year',
-       text: { value: '10 Jul 2015', index: 9002 },
-       standard: '2015-07-10',
-       numericDate: 1436486400000,
-       from: true,
-       iTo: 16 },
-     { type: 'with letters',
-       format: 'day month year',
-       text: { value: '14 Jul 2015', index: 9017 },
-       standard: '2015-07-14',
-       numericDate: 1436832000000,
-       to: true,
-       iFrom: 15 },
-     { type: 'with letters',
-       format: 'day month year',
-       text: { value: '14 July 2015', index: 9237 },
-       standard: '2015-07-14',
-       numericDate: 1436832000000,
-       between: { iFrom: 15, iTo: 16 },
-       alreadyExists: true },
-     { type: 'with letters',
-       format: 'day month year',
-       text: { value: '17 Nov 2015', index: 9671 },
-       standard: '2015-11-17',
-       numericDate: 1447718400000,
-       from: true,
-       iTo: 19 },
-     { type: 'with letters',
-       format: 'day month year',
-       text: { value: '18 Nov 2015', index: 9686 },
-       standard: '2015-11-18',
-       numericDate: 1447804800000,
-       to: true,
-       iFrom: 18 } ],
-  uniqueCount: 11,
-  fromToCount: 4 }
+```Javascript
 ```
-
 
 ## License
 
-date-search-engine is licensed under the MIT license.
+Datich is licensed under the MIT license.

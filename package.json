@@ -1,10 +1,10 @@
 {
-  "name": "date-search-engine",
-  "description": "A node.js module for searching dates.",
+  "name": "datich",
+  "description": "A node.js module that searches dates and times.",
   "version": "0.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/elixirhub/date-search-engine.git"
+    "url": "https://github.com/elixirhub/datich.git"
   },
   "main": "./lib/inspect.js",
   "engines": {

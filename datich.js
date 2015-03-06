@@ -8,15 +8,9 @@ var https = require('https');
 var util = require('util');
 
 var lib = {
-  "inspect": require('./lib/inspect.js')
+  "datich": require('./lib/datich.js')
 };
 
-
-/**
- * inspect.js
- *
- * node inspect.js URL...
- */
 
 for (var i = 2, c = 2; i < process.argv.length; i++) {
   (function (i) {
@@ -35,7 +29,7 @@ for (var i = 2, c = 2; i < process.argv.length; i++) {
 
       res.on('end', function () {
 
-        var results = lib.inspect(htmlReceived, {
+        var results = lib.datich(htmlReceived, {
           "logs": ['main']
         });
         
