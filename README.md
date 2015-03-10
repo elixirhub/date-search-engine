@@ -6,7 +6,7 @@
 ```Javascript
 var datich = require('datich');
 
-var result = datich(html);
+var dates = datich(html);
 ```
 
 
