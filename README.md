@@ -27,6 +27,7 @@ dates [
 
 ```Shell
 node datich.js http://elixir-europe.org/events
+node datich.js '20 April 2015' '21 Apr 2015'
 ```
 
 
